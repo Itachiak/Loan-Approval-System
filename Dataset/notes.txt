@@ -1,0 +1,23 @@
+This is used to transform the data into label encoding like 0 and 1
+before doing this we need to import library from the sklearn.preprocessing import labelencoder.
+lb = labelencoder()
+df_train['Gender']=lb.fit_transform(df_train['Gender'])
+
+to manually change the values to 0 and 1 we can use replace function and replace the values
+df_train["Loan_Status"].replace({'Y':1, 'N':0}, inplace=True)
+
+## this is used to replace the null values for mode make sure to mention [0] in the end for mean it is not necessary
+df_train['Gender'].loc[df_train['Gender'].isnull()] = df_train["Gender"].mode()[0]
+
+when the data is over fitted we can do GridSearchCV and crossfit in random forest to increase the score.
+
+For GridSearchCV we can use the parameters to see the changes in score param_grid = {
+    'n_estimators': [50, 100, 150],  # Number of trees in the forest
+    'max_depth': [None, 10, 20, 30],  # Maximum depth of the trees
+    'min_samples_split': [2, 5, 10],  # Minimum number of samples required to split an internal node
+    'min_samples_leaf': [1, 2, 4]  # Minimum number of samples required to be at a leaf node
+}
+
+df_train.corr() gives us the correlation of the given data.
+
+
